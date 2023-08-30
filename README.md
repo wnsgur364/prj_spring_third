@@ -21,6 +21,6 @@ API의 이해를 위해 여러가지 API를 구현 예정<br>
     <td>tomcat 9.0</td>
     <td>spring, mybatis, maven</td>
     <td>bootstrap, jquery, jquery-ui</td>
-    <td></td>
+    <td>etc</td>
   </tbody>
 </table>
