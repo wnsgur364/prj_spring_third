@@ -6,11 +6,12 @@ import java.util.UUID;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.third.app.infra.common.constants.Constants;
+import com.third.app.infra.modules.dto.Member;
 
 public class UtilUpload {
 
-	public static void upload (MultipartFile multipartFile, String className) throws Exception {
-//		, Member dto
+	public static void upload (MultipartFile multipartFile, String className, Member dto) throws Exception {
+		
 		String fileName = multipartFile.getOriginalFilename();
 		String ext = fileName.substring(fileName.lastIndexOf(".") + 1);
 		String uuid = UUID.randomUUID().toString();
@@ -25,11 +26,11 @@ public class UtilUpload {
 		  
 		multipartFile.transferTo(new File(path + uuidFileName));
 		
-//		dto.setPath(pathForView);
-//		dto.setOriginalName(fileName);
-//		dto.setUuidName(uuidFileName);
-//		dto.setExt(ext);
-//		dto.setSize(multipartFile.getSize());
+		dto.setPath(pathForView);
+		dto.setOriginalName(fileName);
+		dto.setUuidName(uuidFileName);
+		dto.setExt(ext);
+		dto.setSize(multipartFile.getSize());
 
 	}
 	

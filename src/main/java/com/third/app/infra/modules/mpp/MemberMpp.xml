@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis,org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.third.app.infra.modules.mpp.MemberMpp">
+
+	<resultMap id="resultMapObj" type="com.third.app.infra.modules.dto.Member"></resultMap>	
+
+	<sql id="member">
+		a.seq,
+	    a.delNy,
+		a.defaultNy,
+	    a.id,
+	    a.pw,
+	    a.name,
+	    a.dob,
+	    a.gender,
+	    c.email,
+	    d.phone,
+	    b.zipcode,
+	    CONCAT(b.address, ' ', b.addressDetail) AS address,
+	    a.regDate,
+	    a.updtDate
+	</sql>
+	
+	<sql id="selectCommon">
+		FROM 
+			member a
+				LEFT JOIN memberAddress b ON b.member_seq = a.seq AND b.defaultNy = 1 
+			    LEFT JOIN memberEmail c ON c.member_seq = a.seq AND c.defaultNy = 1 
+			    LEFT JOIN memberPhone d ON d.member_seq = a.seq AND d.defaultNy = 1 
+		WHERE 1=1
+<!-- 			<if test="shKeyword != null and !shKeyword.equals('')"> -->
+<!-- 	            AND ( -->
+<!-- 	                b.id LIKE CONCAT('%',#{shKeyword},'%') -->
+<!-- 	                OR name LIKE CONCAT('%',#{shKeyword},'%') -->
+<!-- 	                OR email LIKE CONCAT('%',#{shKeyword},'%') -->
+<!-- 	               	OR phone LIKE CONCAT('%',#{shKeyword},'%') -->
+<!-- 	               	OR gender LIKE CONCAT('%',#{shKeyword},'%') -->
+<!-- 	               	OR level LIKE CONCAT('%',#{shKeyword},'%') -->
+<!-- 	            ) -->
+<!--         	</if> -->
+<!-- 			<choose> -->
+<!-- 				<when test="shOption == 1">AND id LIKE CONCAT('%',#{shKeyword},'%')</when> -->
+<!-- 				<when test="shOption == 2">AND name LIKE CONCAT('%',#{shKeyword},'%')</when> -->
+<!-- 				<when test="shOption == 3">AND email LIKE CONCAT('%',#{shKeyword},'%')</when> -->
+<!-- 				<when test="shOption == 4">AND phone LIKE CONCAT('%',#{shKeyword},'%')</when> -->
+<!-- 				<when test="shOption == 5">AND gender LIKE CONCAT('%',#{shKeyword},'%')</when> -->
+<!-- 				<when test="shOption == 6">AND level LIKE CONCAT('%',#{shKeyword},'%')</when> -->
+<!-- 			</choose>		 -->
+	</sql>
+	
+   	<select id="selectOneCount" resultType="Integer">
+		SELECT count(*)
+		<include refid="selectCommon" />
+	</select>
+	
+	<select id="selectList" resultMap="resultMapObj">
+		SELECT m.* FROM (
+			SELECT
+				<include refid="member" />
+				<include refid="selectCommon" />
+		) m
+		WHERE delNy = 0
+		LIMIT #{rowNumToShow} OFFSET #{startRnumForMysql}
+	</select> 
+
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT 
+		  	<include refid="member" /> 
+		FROM 
+		  	member 
+		WHERE 1=1
+	  		AND seq = #{seq}
+	</select>
+	
+	<select id="loginProc" resultMap="resultMapObj">
+		SELECT 
+		  	seq,
+		  	id,
+		  	name
+		FROM 
+		  	member 
+		WHERE 1=1
+	  		AND id = #{id}
+	  		AND pw = #{pw}
+	</select>
+	
+	<select id="loginAdminProc" resultMap="resultMapObj">
+		SELECT 
+		  	seq,
+		  	id,
+		  	name,
+		  	defaultNy
+		FROM 
+		  	member 
+		WHERE 1=1
+	  		AND id = #{id}
+	  		AND pw = #{pw}
+	</select>
+	
+    <update id="update">
+        UPDATE 
+        	member
+        SET 
+        	name = #{name},
+        	pw = #{pw},
+        	dob = #{dob},
+        	gender = #{gender},
+			email = #{email},
+			phone = #{phone},
+			address = #{address},
+			updtDate = now()
+        WHERE 
+        	seq = #{seq}
+    </update>
+
+	<insert id="insert">
+ 		INSERT INTO member (
+ 			delNy,
+ 			defaultNy,
+ 			id,
+			name,
+			pw,
+			dob,
+			gender,
+			email,
+			phone,
+			address
+			
+    	) VALUES (
+    		0,
+    		0,
+    		#{id},
+    		#{name},
+    		#{pw},
+    		#{dob},
+    		#{gender},
+    		#{email},
+    		#{phone},
+    		#{address}
+		)
+	</insert>
+     
+    <update id="delete">
+        UPDATE 
+        	member
+       	SET
+			delNy = "1"
+		WHERE				
+		 	seq = #{seq}
+    </update>
+	
+	<select id="selectListUploaded" resultMap="resultMapObj">
+		SELECT 
+			seq
+			,type
+			,defaultNy
+			,sort
+			,path
+			,originalName
+			,uuidName
+		FROM third.memberUploaded
+		WHERE 1=1
+			AND delNy = 0
+			AND pseq = #{seq}
+		ORDER BY
+			type, sort
+	</select>
+    
+</mapper>	

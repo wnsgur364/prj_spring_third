@@ -1,4 +1,4 @@
-package com.third.app.infra.modules.index;
+package com.third.app.infra.modules.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
