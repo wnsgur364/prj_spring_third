@@ -31,24 +31,24 @@
 			    LEFT JOIN memberEmail c ON c.member_seq = a.seq AND c.defaultNy = 1 
 			    LEFT JOIN memberPhone d ON d.member_seq = a.seq AND d.defaultNy = 1 
 		WHERE 1=1
-<!-- 			<if test="shKeyword != null and !shKeyword.equals('')"> -->
-<!-- 	            AND ( -->
-<!-- 	                b.id LIKE CONCAT('%',#{shKeyword},'%') -->
-<!-- 	                OR name LIKE CONCAT('%',#{shKeyword},'%') -->
-<!-- 	                OR email LIKE CONCAT('%',#{shKeyword},'%') -->
-<!-- 	               	OR phone LIKE CONCAT('%',#{shKeyword},'%') -->
-<!-- 	               	OR gender LIKE CONCAT('%',#{shKeyword},'%') -->
-<!-- 	               	OR level LIKE CONCAT('%',#{shKeyword},'%') -->
-<!-- 	            ) -->
-<!--         	</if> -->
-<!-- 			<choose> -->
-<!-- 				<when test="shOption == 1">AND id LIKE CONCAT('%',#{shKeyword},'%')</when> -->
-<!-- 				<when test="shOption == 2">AND name LIKE CONCAT('%',#{shKeyword},'%')</when> -->
-<!-- 				<when test="shOption == 3">AND email LIKE CONCAT('%',#{shKeyword},'%')</when> -->
-<!-- 				<when test="shOption == 4">AND phone LIKE CONCAT('%',#{shKeyword},'%')</when> -->
-<!-- 				<when test="shOption == 5">AND gender LIKE CONCAT('%',#{shKeyword},'%')</when> -->
-<!-- 				<when test="shOption == 6">AND level LIKE CONCAT('%',#{shKeyword},'%')</when> -->
-<!-- 			</choose>		 -->
+			<if test="shKeyword != null and !shKeyword.equals('')">
+	            AND (
+	                b.id LIKE CONCAT('%',#{shKeyword},'%')
+	                OR name LIKE CONCAT('%',#{shKeyword},'%')
+	                OR email LIKE CONCAT('%',#{shKeyword},'%')
+	               	OR phone LIKE CONCAT('%',#{shKeyword},'%')
+	               	OR gender LIKE CONCAT('%',#{shKeyword},'%')
+	               	OR defaultNy LIKE CONCAT('%',#{shKeyword},'%')
+	            )
+        	</if>
+			<choose>
+				<when test="shOption == 1">AND id LIKE CONCAT('%',#{shKeyword},'%')</when>
+				<when test="shOption == 2">AND name LIKE CONCAT('%',#{shKeyword},'%')</when>
+				<when test="shOption == 3">AND email LIKE CONCAT('%',#{shKeyword},'%')</when>
+				<when test="shOption == 4">AND phone LIKE CONCAT('%',#{shKeyword},'%')</when>
+				<when test="shOption == 5">AND gender LIKE CONCAT('%',#{shKeyword},'%')</when>
+				<when test="shOption == 6">AND defaultNy LIKE CONCAT('%',#{shKeyword},'%')</when>
+			</choose>		
 	</sql>
 	
    	<select id="selectOneCount" resultType="Integer">
@@ -125,9 +125,8 @@
 			pw,
 			dob,
 			gender,
-			email,
-			phone,
-			address
+			regDate,
+			updtDate
 			
     	) VALUES (
     		0,
@@ -137,9 +136,26 @@
     		#{pw},
     		#{dob},
     		#{gender},
-    		#{email},
-    		#{phone},
-    		#{address}
+    		now(),
+    		now()
+		)
+	</insert>
+	
+	<insert id="insertEmail">
+		INSERT INTO memberEmail (
+			delNy
+			,defaultNy
+			,email
+			,regDate
+			,updtDate
+			,member_seq
+		) VALUES (
+			0
+			,#{defaultNy}
+			,#{email}
+			,now()
+			,now()
+			,#{member_seq}
 		)
 	</insert>
      
