@@ -158,6 +158,46 @@
 			,#{member_seq}
 		)
 	</insert>
+	
+	<insert id="insertPhone">
+		INSERT INTO memberPhone (
+			delNy
+			,defaultNy
+			,phone
+			,regDate
+			,updtDate
+			,member_seq
+		) VALUES (
+			0
+			,#{defaultNy}
+			,#{phone}
+			,now()
+			,now()
+			,#{member_seq}
+		)
+	</insert>
+	
+	<insert id="insertAddress">
+		INSERT INTO memberAddress (
+			delNy
+			,defaultNy
+			,zipcode
+			,address
+			,addressDetail
+			,regDate
+			,updtDate
+			,member_seq
+		) VALUES (
+			0
+			,#{defaultNy}
+			,#{zipcode}
+			,#{address}
+			,#{addressDetail}
+			,now()
+			,now()
+			,#{member_seq}
+		)
+	</insert>
      
     <update id="delete">
         UPDATE 

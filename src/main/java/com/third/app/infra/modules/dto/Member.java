@@ -20,6 +20,9 @@ public class Member extends Base {
     private Integer address;
     private Date regDate;
     private Date updtDate;
+    private String member_seq;
+    private String zipcode;
+    private String addressDetail;
 
 	private MultipartFile[] uploadImgProfile;
 	private Integer uploadImgProfileType;	
@@ -116,6 +119,24 @@ public class Member extends Base {
 	}
 	public void setUpdtDate(Date updtDate) {
 		this.updtDate = updtDate;
+	}
+	public String getMember_seq() {
+		return member_seq;
+	}
+	public void setMember_seq(String member_seq) {
+		this.member_seq = member_seq;
+	}
+	public String getZipcode() {
+		return zipcode;
+	}
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
+	}
+	public String getAddressDetail() {
+		return addressDetail;
+	}
+	public void setAddressDetail(String addressDetail) {
+		this.addressDetail = addressDetail;
 	}
 	public MultipartFile[] getUploadImgProfile() {
 		return uploadImgProfile;
