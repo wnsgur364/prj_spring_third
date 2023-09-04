@@ -18,7 +18,7 @@
     <div class="container">
         <div class="col">
         	<form>
-             	<table class="table table-hover text-center">
+             	<table class="table table-hover text-center table-responsive">
                  	<thead>
 	                 	<tr>
 	                      	<th scope="col">번호</th>

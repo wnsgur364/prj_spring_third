@@ -59,22 +59,17 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	@Transactional
-	public int insert(Member dto) {
-	    try {
-	        // 회원 정보 삽입
-	        dao.insert(dto);
+	public int insert(Member dto) throws Exception {
+        
+        dao.insertEmail(dto);
+        dao.insertPhone(dto);
+        dao.insertAddress(dto);
 
-	        // 이메일, 전화번호, 주소 정보 삽입
-	        dao.insertEmail(dto);
-	        dao.insertPhone(dto);
-	        dao.insertAddress(dto);
-
-	        // 성공 시 1 반환 (또는 성공한 레코드 수 반환)
-	        return 1;
-	    } catch (Exception e) {
-	        // 실패 시 0 반환 또는 예외 처리
-	        return 0;
-	    }
+		uploadFiles(dto.getUploadImgProfile(), dto, "memberUploaded", dto.getUploadImgProfileType(), dto.getUploadImgProfileMaxNumber());
+		uploadFiles(dto.getUploadImg(), dto, "memberUploaded", dto.getUploadImgType(), dto.getUploadImgMaxNumber());
+		uploadFiles(dto.getUploadFile(), dto, "memberUploaded", dto.getUploadFileType(), dto.getUploadFileMaxNumber());
+		
+		return dao.insert(dto);
 	}
 	
 	@Override

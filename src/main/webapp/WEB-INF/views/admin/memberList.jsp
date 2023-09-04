@@ -22,35 +22,37 @@
 					<input type="hidden" name="thisPage" value="<c:out value="${vo.thisPage}" default="1"/>">
 					<input type="hidden" name="rowNumToShow" value="<c:out value="${vo.rowNumToShow}"/>">
 					<div class="col-4 d-flex">
-	   					<select id="shOption" class="form-control" name="shOption">
+	   					<select id="shOption" class="form-select" name="shOption">
 			                <option value="" <c:if test="${empty vo.shOption}">selected</c:if>>검색구분</option>
-			                <option value="1" <c:if test="${vo.shOption eq 1}">selected</c:if>>코드명</option>
-			                <option value="2" <c:if test="${vo.shOption eq 2}">selected</c:if>>코드그룹명</option>
+			                <option value="1" <c:if test="${vo.shOption eq 1}">selected</c:if>>아이디</option>
+			                <option value="2" <c:if test="${vo.shOption eq 2}">selected</c:if>>이름</option>
+			                <option value="3" <c:if test="${vo.shOption eq 3}">selected</c:if>>이메일</option>
+			                <option value="4" <c:if test="${vo.shOption eq 4}">selected</c:if>>전화번호</option>
+			                <option value="5" <c:if test="${vo.shOption eq 5}">selected</c:if>>성별</option>
+			                <option value="6" <c:if test="${vo.shOption eq 6}">selected</c:if>>회원등급</option>
 	   					</select>
-	   					<div class="col d-flex justify-content-center align-items-center mb-3">
-			                <input class="form-control" type="text" placeholder="검색어" aria-label="Search" name="shKeyword" value="<c:out value="${vo.shKeyword}"/>">
-			                <button class="btn btn-outline-dark" id="btnSearch" type="button"><i class="bi bi-search"></i></button>
-				        </div>
+		                <input class="form-control" type="text" placeholder="검색어" aria-label="Search" name="shKeyword" value="<c:out value="${vo.shKeyword}"/>">
+		                <button class="btn btn-outline-dark" id="btnSearch" type="button"><i class="bi bi-search"></i></button>
 					</div>
 				</div>
-             	<table class="table table-hover text-center">
+             	<table class="table table-hover text-center table-responsive">
                  	<thead>
 	                 	<tr>
 	                 		<th>
 	                 			<input type="checkbox" name="checked" id="allCheck" value="">
 	                 		</th>
-	                      	<th scope="col">번호</th>
-	 	                    <th scope="col">회원등급</th>
-	     	                <th scope="col">아이디</th>
-	         	            <th scope="col">이름</th>
-	         	            <th scope="col">생일</th>
-							<th scope="col">성별</th>
-							<th scope="col">이메일</th>
-							<th scope="col">전화번호</th>
-							<th scope="col">우편번호</th>
-							<th scope="col">주소</th>
-							<th scope="col">등록일자</th>
-							<th scope="col">수정일자</th>
+	                      	<th>번호</th>
+	 	                    <th>회원등급</th>
+	     	                <th>아이디</th>
+	         	            <th>이름</th>
+	         	            <th>생일</th>
+							<th>성별</th>
+							<th>이메일</th>
+							<th>전화번호</th>
+							<th>우편번호</th>
+							<th>주소</th>
+							<th>등록일자</th>
+							<th>수정일자</th>
 	             		</tr>
 	                 </thead>
 	                 <tbody>
@@ -63,21 +65,21 @@
 							<c:otherwise>
 								<c:forEach items="${list}" var="list" >
 									<tr>
-									    <th scope="row">
+									    <th>
 									    	<input type="checkbox" name="checked" value="">
 									    </th>
 									    <td><c:out value="${list.seq}"></c:out></td>
-									    <td>2</td>
-									    <td>3</td>
-									    <td>4</td>
-									    <td>5</td>
-									    <td>6</td>
-									    <td>7</td>
-									    <td>8</td>
-									    <td>9</td>
-									    <td>10</td>
-									    <td>11</td>
-									    <td>12</td>
+									    <td><c:out value="${list.defaultNy}"></c:out></td>
+									    <td><c:out value="${list.id}"></c:out></td>
+									    <td><c:out value="${list.name}"></c:out></td>
+									    <td><c:out value="${list.dob}"></c:out></td>
+									    <td><c:out value="${list.gender}"></c:out></td>
+									    <td><c:out value="${list.email}"></c:out></td>
+									    <td><c:out value="${list.phone}"></c:out></td>
+									    <td><c:out value="${list.zipcode}"></c:out></td>
+									    <td><c:out value="${list.address}"></c:out></td>
+									    <td><c:out value="${list.regDate}"></c:out></td>
+									    <td><c:out value="${list.updtDate}"></c:out></td>
 									</tr>
 								</c:forEach>
 							</c:otherwise>
@@ -92,7 +94,7 @@
         <div class="col d-flex justify-content-center align-items-center">
        		<button class="btn btn-outline-dark" type="button" onclick="location.href='memberForm'">추가</button>
         	<button class="btn btn-outline-dark" id="btnModification" type="button" >수정</button>
-			<button class="btn btn-light" id="btnExcel" type="button"><i class="far fa-file-excel fa-lg"></i></button>
+			<button class="btn btn-outline-dark" id="btnExcel" type="button">엑셀변환</button>
         </div>
     </div>
 <script>

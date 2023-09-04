@@ -16,7 +16,7 @@ public class MemberController {
 	@Autowired
 	MemberServiceImpl service;
 	
-	@RequestMapping(value = "/memberList")
+	@RequestMapping("/memberList")
 	public String memberList(@ModelAttribute("vo") MemberVo vo, Model model) {
 		vo.setShKeyword(vo.getShKeyword() == null ? "" : vo.getShKeyword());
 		vo.setParamsPaging(service.selectOneCount(vo));

@@ -15,9 +15,9 @@ public class Member extends Base {
     private String name;
     private String dob;
     private Integer gender;
-    private Integer email;
-    private Integer phone;
-    private Integer address;
+    private String email;
+    private String phone;
+    private String address;
     private Date regDate;
     private Date updtDate;
     private String member_seq;
@@ -90,22 +90,22 @@ public class Member extends Base {
 	public void setGender(Integer gender) {
 		this.gender = gender;
 	}
-	public Integer getEmail() {
+	public String getEmail() {
 		return email;
 	}
-	public void setEmail(Integer email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Integer getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(Integer phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public Integer getAddress() {
+	public String getAddress() {
 		return address;
 	}
-	public void setAddress(Integer address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 	public Date getRegDate() {

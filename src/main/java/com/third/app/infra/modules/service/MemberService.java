@@ -15,7 +15,7 @@ public interface MemberService {
 	public Member loginProc(MemberVo vo);
 	public Member loginAdminProc(MemberVo vo);
 	public int update(Member dto) throws Exception;
-	public int insert(Member dto);
+	public int insert(Member dto) throws Exception;
 	public int delete(Member dto);
 	public void uploadFiles(MultipartFile[] multipartFiles, Member dto, String tableName, int type, int maxNumber) throws Exception;
 
