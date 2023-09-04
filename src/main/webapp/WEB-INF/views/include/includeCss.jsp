@@ -11,5 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+<!-- font awesome -->
+<script src="https://kit.fontawesome.com/b05f67c88a.js" crossorigin="anonymous"></script>
 <!-- style.css -->
 <link rel="stylesheet" href="../../../resources/css/style.css">

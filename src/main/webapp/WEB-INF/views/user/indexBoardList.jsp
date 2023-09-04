@@ -21,7 +21,7 @@
              	<table class="table table-hover text-center">
                  	<thead>
 	                 	<tr>
-	                      <th scope="col">번호</th>
+	                      	<th scope="col">번호</th>
 	 	                    <th class="col-5" scope="col">제목</th>
 	     	                <th scope="col">작성자</th>
 	         	            <th scope="col">날짜</th>

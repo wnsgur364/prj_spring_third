@@ -1,3 +1,4 @@
+package com.third.app.infra.common.interceptor;
 //package com.third.app.infra.common.interceptor;
 //
 //import javax.servlet.http.HttpServletRequest;
@@ -7,18 +8,19 @@
 //
 //import com.third.app.infra.common.constants.Constants;
 //
-//public class CheckLoginSessionInterception extends HandlerInterceptorAdapter {
+//public class CheckLoginAdminSessionInterception extends HandlerInterceptorAdapter {
 //	
 //	@Override
 //	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 //			throws Exception {
 //		if (request.getSession().getAttribute("id") != null) {
-////			System.out.println("사용자 인터셉트 정상 작동");
+////			System.out.println("관리자 인터셉트 정상 작동");
 //			// by pass
 //		} else {
-//			response.sendRedirect(Constants.URL_LOGINFORM);
+//			response.sendRedirect(Constants.URL_LOGINXDMFORM);
 //            return false;
 //		}
 //		return super.preHandle(request, response, handler);
 //	}
+//
 //}

@@ -33,21 +33,21 @@
 		WHERE 1=1
 			<if test="shKeyword != null and !shKeyword.equals('')">
 	            AND (
-	                b.id LIKE CONCAT('%',#{shKeyword},'%')
-	                OR name LIKE CONCAT('%',#{shKeyword},'%')
-	                OR email LIKE CONCAT('%',#{shKeyword},'%')
-	               	OR phone LIKE CONCAT('%',#{shKeyword},'%')
-	               	OR gender LIKE CONCAT('%',#{shKeyword},'%')
-	               	OR defaultNy LIKE CONCAT('%',#{shKeyword},'%')
+	                a.id LIKE CONCAT('%',#{shKeyword},'%')
+	                OR a.name LIKE CONCAT('%',#{shKeyword},'%')
+	                OR c.email LIKE CONCAT('%',#{shKeyword},'%')
+	               	OR d.phone LIKE CONCAT('%',#{shKeyword},'%')
+	               	OR a.gender LIKE CONCAT('%',#{shKeyword},'%')
+	               	OR a.defaultNy LIKE CONCAT('%',#{shKeyword},'%')
 	            )
         	</if>
 			<choose>
-				<when test="shOption == 1">AND id LIKE CONCAT('%',#{shKeyword},'%')</when>
-				<when test="shOption == 2">AND name LIKE CONCAT('%',#{shKeyword},'%')</when>
-				<when test="shOption == 3">AND email LIKE CONCAT('%',#{shKeyword},'%')</when>
-				<when test="shOption == 4">AND phone LIKE CONCAT('%',#{shKeyword},'%')</when>
-				<when test="shOption == 5">AND gender LIKE CONCAT('%',#{shKeyword},'%')</when>
-				<when test="shOption == 6">AND defaultNy LIKE CONCAT('%',#{shKeyword},'%')</when>
+				<when test="shOption == 1">AND a.id LIKE CONCAT('%',#{shKeyword},'%')</when>
+				<when test="shOption == 2">AND a.name LIKE CONCAT('%',#{shKeyword},'%')</when>
+				<when test="shOption == 3">AND c.email LIKE CONCAT('%',#{shKeyword},'%')</when>
+				<when test="shOption == 4">AND d.phone LIKE CONCAT('%',#{shKeyword},'%')</when>
+				<when test="shOption == 5">AND a.gender LIKE CONCAT('%',#{shKeyword},'%')</when>
+				<when test="shOption == 6">AND a.defaultNy LIKE CONCAT('%',#{shKeyword},'%')</when>
 			</choose>		
 	</sql>
 	
