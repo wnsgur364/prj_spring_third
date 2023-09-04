@@ -13,3 +13,5 @@
 <script src="../../../resources/js/fileUpload.js"></script>
 <!-- common.js -->
 <script src="../../../resources/js/common.js"></script>
+<!-- validation.js -->
+<script src="../../../resources/js/validation.js"></script>

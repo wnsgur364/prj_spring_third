@@ -27,4 +27,10 @@ public class MemberController {
 		}
 		return "admin/memberList";
 	}
+	
+	@RequestMapping("/memberForm")
+	public String memberForm(MemberVo vo, Model model) {
+		model.addAttribute("item", service.selectOne(vo));
+		return "admin/memberForm";
+	}
 }

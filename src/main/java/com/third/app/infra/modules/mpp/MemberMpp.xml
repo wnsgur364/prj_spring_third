@@ -70,9 +70,12 @@
 		SELECT 
 		  	<include refid="member" /> 
 		FROM 
-		  	member 
+			member a
+				LEFT JOIN memberAddress b ON b.member_seq = a.seq AND b.defaultNy = 1 
+			    LEFT JOIN memberEmail c ON c.member_seq = a.seq AND c.defaultNy = 1 
+			    LEFT JOIN memberPhone d ON d.member_seq = a.seq AND d.defaultNy = 1 
 		WHERE 1=1
-	  		AND seq = #{seq}
+			AND a.seq = #{seq}
 	</select>
 	
 	<select id="loginProc" resultMap="resultMapObj">
