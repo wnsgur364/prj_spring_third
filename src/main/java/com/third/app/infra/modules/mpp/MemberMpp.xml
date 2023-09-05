@@ -21,7 +21,7 @@
 	    b.zipcode,
 	    CONCAT(b.address, ' ', b.addressDetail) AS address,
 	    a.regDate,
-	    a.updtDate
+	    a.modDate
 	</sql>
 	
 	<sql id="selectCommon">
@@ -114,7 +114,7 @@
 			email = #{email},
 			phone = #{phone},
 			address = #{address},
-			updtDate = now()
+			modDate = now()
         WHERE 
         	seq = #{seq}
     </update>
@@ -129,7 +129,7 @@
 			dob,
 			gender,
 			regDate,
-			updtDate
+			modDate
 			
     	) VALUES (
     		0,
@@ -150,7 +150,7 @@
 			,defaultNy
 			,email
 			,regDate
-			,updtDate
+			,modDate
 			,member_seq
 		) VALUES (
 			0
@@ -168,7 +168,7 @@
 			,defaultNy
 			,phone
 			,regDate
-			,updtDate
+			,modDate
 			,member_seq
 		) VALUES (
 			0
@@ -188,7 +188,7 @@
 			,address
 			,addressDetail
 			,regDate
-			,updtDate
+			,modDate
 			,member_seq
 		) VALUES (
 			0

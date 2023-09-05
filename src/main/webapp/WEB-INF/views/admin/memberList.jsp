@@ -79,7 +79,7 @@
 									    <td><c:out value="${list.zipcode}"></c:out></td>
 									    <td><c:out value="${list.address}"></c:out></td>
 									    <td><c:out value="${list.regDate}"></c:out></td>
-									    <td><c:out value="${list.updtDate}"></c:out></td>
+									    <td><c:out value="${list.modDate}"></c:out></td>
 									</tr>
 								</c:forEach>
 							</c:otherwise>
@@ -103,6 +103,15 @@
 		$("form[name=formList]").attr("action","/memberList").submit();
 	});
 	
+    $(document).ready(function () {
+        $('tr').click(function (event) {
+            var $checkbox = $(this).find('input[type="checkbox"]');
+            if (event.target !== $checkbox[0]) {
+                $checkbox.prop('checked', !$checkbox.prop('checked'));
+            }
+        });
+    });
+	
 	$("#btnModification").click(function() {
 		// 체크된 체크박스를 배열로 저장
 		var checkedItems = [];
@@ -112,7 +121,7 @@
 	
 		// 수정 폼으로 데이터 전달
 		if (checkedItems.length > 0) {
-			var url = "codeForm?seq=" + checkedItems.join(",");
+			var url = "memberForm?seq=" + checkedItems.join(",");
 			location.href = url;
 		}
 		
@@ -136,7 +145,7 @@
 	// 페이지네이션
 	goList = function(thisPage) {
 		$("input:hidden[name=thisPage]").val(thisPage);
-		$("form[name=formList]").attr("action", "codeList").submit();
+		$("form[name=formList]").attr("action", "memberList").submit();
 	}
 	
 	// 엑셀 변환

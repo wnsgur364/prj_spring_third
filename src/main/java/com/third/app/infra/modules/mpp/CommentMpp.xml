@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis,org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.third.app.infra.modules.mpp.CommentMpp">
+
+	<resultMap id="resultMapObj" type="com.third.app.infra.modules.dto.Comment"></resultMap>	
+
+	<sql id="comment">
+	    a.seq,
+	    a.delNy,
+	    a.defaultNy,
+	    CONCAT(b.id, ' ', b.name) AS commentAuthor,
+	    a.comment,
+	    a.like,
+	    a.regDate,
+	    a.modDate,
+	    a.member_seq,
+	    a.board_seq
+	</sql>
+	
+	<sql id="selectCommon">
+		FROM comment a
+			LEFT JOIN member b ON b.seq = a.member_seq AND b.delNy = 0
+		WHERE 1=1
+			<if test="shKeyword != null and !shKeyword.equals('')">
+	            AND (
+	                commentAuthor LIKE CONCAT('%',#{shKeyword},'%')
+	                OR comment LIKE CONCAT('%',#{shKeyword},'%')
+	            )
+        	</if>
+			<choose>
+				<when test="shOption == 1">AND commentAuthor LIKE CONCAT('%',#{shKeyword},'%')</when>
+				<when test="shOption == 2">AND comment LIKE CONCAT('%',#{shKeyword},'%')</when>
+			</choose>
+	</sql>
+	
+   	<select id="selectOneCount" resultType="Integer">
+		SELECT count(*)
+		<include refid="selectCommon" />
+	</select>
+	
+	<select id="selectList" resultMap="resultMapObj">
+		SELECT c.* FROM (
+			SELECT
+				<include refid="comment" />
+				<include refid="selectCommon" />
+		) c
+		WHERE delNy = 0
+		LIMIT #{rowNumToShow} OFFSET #{startRnumForMysql}
+	</select> 
+
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT 
+		  	<include refid="board" /> 
+		FROM comment a
+			LEFT JOIN member b ON b.seq = a.member_seq AND b.delNy = 0
+		WHERE 1=1
+			AND a.seq = #{seq}
+	</select>
+	
+    <update id="update">
+        UPDATE 
+        	comment
+        SET 
+        	comment = #{comment},
+			modDate = now()
+        WHERE 
+        	seq = #{seq}
+    </update>
+
+    <update id="updateLike">
+        UPDATE 
+        	comment
+        SET 
+			like = #{like}
+        WHERE 
+        	seq = #{seq}
+    </update>
+
+	<insert id="insert">
+ 		INSERT INTO comment (
+ 			delNy,
+ 			defaultNy,
+ 			commentAuthor,
+			comment,
+			like,
+			regDate,
+			modDate,
+			member_seq,
+			board_seq
+    	) VALUES (
+    		0,
+    		0,
+    		#{commentAuthor},
+    		#{comment},
+    		#{like},
+    		now(),
+    		now(),
+    		#{member_seq},
+    		#{board_seq}
+		)
+	</insert>
+     
+    <update id="delete">
+        UPDATE 
+        	comment
+       	SET
+			delNy = "1"
+		WHERE				
+		 	seq = #{seq}
+    </update>
+	
+</mapper>	

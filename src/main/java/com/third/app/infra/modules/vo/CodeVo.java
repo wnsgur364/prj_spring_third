@@ -1,8 +1,6 @@
 package com.third.app.infra.modules.vo;
 
-import com.third.app.infra.common.base.BaseVo;
-
-public class MemberVo extends BaseVo {
+public class CodeVo {
 	private Integer shOption;
 	private String shKeyword;
 	private String seq;
@@ -25,4 +23,4 @@ public class MemberVo extends BaseVo {
 	public void setSeq(String seq) {
 		this.seq = seq;
 	}
-}	
+}

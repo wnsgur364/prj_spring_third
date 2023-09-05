@@ -13,7 +13,6 @@ import com.third.app.infra.modules.vo.MemberVo;
 
 @Repository
 public class MemberDao {
-	
 	@Inject
 	@Resource(name = "sqlSession")
 	private SqlSession sqlSession;
@@ -33,5 +32,4 @@ public class MemberDao {
 	public int insertAddress(Member dto) { return sqlSession.insert(namespace + ".insertAddress", dto); }
 //	uploaded
 	public int insertUploaded(Member dto) { return sqlSession.insert("Base" + ".insertUploaded", dto); }
-
 }

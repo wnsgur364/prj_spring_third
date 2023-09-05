@@ -6,24 +6,19 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.third.app.infra.common.base.Base;
 
-public class Member extends Base {
+public class Board extends Base {
 	private String seq;
-	private Integer delNy;
+	private	Integer delNy;
 	private Integer defaultNy;
-    private String id;
-    private String pw;
-    private String name;
-    private String dob;
-    private Integer gender;
-    private String email;
-    private String phone;
-    private String address;
-    private Date regDate;
-    private Date modDate;
-    private String member_seq;
-    private String zipcode;
-    private String addressDetail;
-
+	private String author;
+	private String title;
+	private String body;
+	private Integer comment;
+	private Integer like;
+	private Date regDate;
+	private Date modDate;
+	private String member_seq;
+	
 	private MultipartFile[] uploadImgProfile;
 	private Integer uploadImgProfileType;	
 	private Integer uploadImgProfileMaxNumber;
@@ -41,7 +36,7 @@ public class Member extends Base {
 	private Integer uploadFileMaxNumber;
 	private String[] uploadFileDeleteSeq;
 	private String[] uploadFileDeletePathFile;
-//	-----
+//	----
 	public String getSeq() {
 		return seq;
 	}
@@ -60,53 +55,35 @@ public class Member extends Base {
 	public void setDefaultNy(Integer defaultNy) {
 		this.defaultNy = defaultNy;
 	}
-	public String getId() {
-		return id;
+	public String getAuthor() {
+		return author;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
-	public String getPw() {
-		return pw;
+	public String getTitle() {
+		return title;
 	}
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public String getName() {
-		return name;
+	public String getBody() {
+		return body;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setBody(String body) {
+		this.body = body;
 	}
-	public String getDob() {
-		return dob;
+	public Integer getComment() {
+		return comment;
 	}
-	public void setDob(String dob) {
-		this.dob = dob;
+	public void setComment(Integer comment) {
+		this.comment = comment;
 	}
-	public Integer getGender() {
-		return gender;
+	public Integer getLike() {
+		return like;
 	}
-	public void setGender(Integer gender) {
-		this.gender = gender;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setLike(Integer like) {
+		this.like = like;
 	}
 	public Date getRegDate() {
 		return regDate;
@@ -125,18 +102,6 @@ public class Member extends Base {
 	}
 	public void setMember_seq(String member_seq) {
 		this.member_seq = member_seq;
-	}
-	public String getZipcode() {
-		return zipcode;
-	}
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
-	}
-	public String getAddressDetail() {
-		return addressDetail;
-	}
-	public void setAddressDetail(String addressDetail) {
-		this.addressDetail = addressDetail;
 	}
 	public MultipartFile[] getUploadImgProfile() {
 		return uploadImgProfile;
@@ -228,5 +193,4 @@ public class Member extends Base {
 	public void setUploadFileDeletePathFile(String[] uploadFileDeletePathFile) {
 		this.uploadFileDeletePathFile = uploadFileDeletePathFile;
 	}
-	
 }

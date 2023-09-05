@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis,org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.third.app.infra.modules.mpp.BoardMpp">
+
+	<resultMap id="resultMapObj" type="com.third.app.infra.modules.dto.Board"></resultMap>	
+
+	<sql id="board">
+	    a.seq,
+	    a.delNy,
+	    a.defaultNy,
+	    CONCAT(c.id, ' ', c.name) AS author,
+	    a.title,
+	    a.body,
+	    COUNT(b.comment) AS comment_count,
+	    a.like,
+	    a.regDate,
+	    a.modDate,
+	    a.member_seq
+	</sql>
+	
+	<sql id="selectCommon">
+		FROM board a
+			LEFT JOIN comment b ON b.board_seq = a.seq AND b.delNy = 0
+			LEFT JOIN member c ON c.seq = a.member_seq AND c.delNy = 0
+		WHERE 1=1
+			<if test="shKeyword != null and !shKeyword.equals('')">
+	            AND (
+	                author LIKE CONCAT('%',#{shKeyword},'%')
+	                OR a.title LIKE CONCAT('%',#{shKeyword},'%')
+	               	OR a.body LIKE CONCAT('%',#{shKeyword},'%')
+	            )
+        	</if>
+			<choose>
+				<when test="shOption == 1">AND author LIKE CONCAT('%',#{shKeyword},'%')</when>
+				<when test="shOption == 2">AND a.title LIKE CONCAT('%',#{shKeyword},'%')</when>
+				<when test="shOption == 3">AND c.body LIKE CONCAT('%',#{shKeyword},'%')</when>
+			</choose>
+		GROUP BY
+		    a.seq,
+		    a.delNy,
+		    a.defaultNy,
+		    author,
+		    a.title,
+		    a.body,
+		    a.like,
+		    a.regDate,
+		    a.modDate,
+		    a.member_seq
+	</sql>
+	
+   	<select id="selectOneCount" resultType="Integer">
+		SELECT count(*)
+		<include refid="selectCommon" />
+	</select>
+	
+	<select id="selectList" resultMap="resultMapObj">
+		SELECT b.* FROM (
+			SELECT
+				<include refid="board" />
+				<include refid="selectCommon" />
+		) b
+		WHERE delNy = 0
+		LIMIT #{rowNumToShow} OFFSET #{startRnumForMysql}
+	</select> 
+
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT 
+		  	<include refid="board" /> 
+		FROM board a
+			LEFT JOIN comment b ON b.board_seq = a.seq AND b.delNy = 0
+			LEFT JOIN member c ON c.seq = a.member_seq AND c.delNy = 0
+		WHERE 1=1
+			AND a.seq = #{seq}
+		GROUP BY
+		    a.seq,
+		    a.delNy,
+		    a.defaultNy,
+		    author,
+		    a.title,
+		    a.body,
+		    a.like,
+		    a.regDate,
+		    a.modDate,
+		    a.member_seq
+	</select>
+	
+    <update id="update">
+        UPDATE 
+        	board
+        SET 
+        	title = #{title},
+        	body = #{body},
+			modDate = now()
+        WHERE 
+        	seq = #{seq}
+    </update>
+
+    <update id="updateLike">
+        UPDATE 
+        	board
+        SET 
+			like = #{like}
+        WHERE 
+        	seq = #{seq}
+    </update>
+
+	<insert id="insert">
+ 		INSERT INTO board (
+ 			delNy,
+ 			defaultNy,
+ 			author,
+			title,
+			body,
+			regDate,
+			modDate,
+			member_seq
+    	) VALUES (
+    		0,
+    		0,
+    		#{author},
+    		#{title},
+    		#{body},
+    		now(),
+    		now(),
+    		#{member_seq}
+		)
+	</insert>
+     
+    <update id="delete">
+        UPDATE 
+        	board
+       	SET
+			delNy = "1"
+		WHERE				
+		 	seq = #{seq}
+    </update>
+	
+	<select id="selectListUploaded" resultMap="resultMapObj">
+		SELECT 
+			seq
+			,type
+			,defaultNy
+			,sort
+			,path
+			,originalName
+			,uuidName
+		FROM third.memberUploaded
+		WHERE 1=1
+			AND delNy = 0
+			AND pseq = #{seq}
+		ORDER BY
+			type, sort
+	</select>
+    
+</mapper>	

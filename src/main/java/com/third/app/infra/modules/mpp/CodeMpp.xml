@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis,org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.third.app.infra.modules.mpp.CodeMpp">
+								 <!-- select 결과를 받을 객체 -->
+	<resultMap id="resultMapObj" type="com.third.app.infra.modules.dto.Code"></resultMap>
+					
+	<sql id="code">
+		a.seq,
+		a.delNy,
+		a.name,
+		b.name as codeGroupName
+	</sql>
+	
+	<sql id="selectCommon">
+		FROM 
+			code a 
+				LEFT JOIN codeGroup b ON b.delNy = 0 AND b.seq = a.codeGroup_seq
+		WHERE 1=1
+			<if test="shKeyword != null and !shKeyword.equals('')">
+	            AND (
+	                a.name LIKE CONCAT('%',#{shKeyword},'%')
+	               	OR b.name LIKE CONCAT('%',#{shKeyword},'%')
+	            )
+        	</if>
+			<choose>
+				<when test="shOption == 1">AND a.name LIKE CONCAT('%',#{shKeyword},'%')</when>
+				<when test="shOption == 2">AND b.name LIKE CONCAT('%',#{shKeyword},'%')</when>
+			</choose>
+	</sql>
+	
+   	<select id="selectOneCount" resultType="Integer">
+		SELECT count(*)
+		<include refid="selectCommon" />
+	</select>
+	
+	<select id="selectList" resultMap="resultMapObj">
+		SELECT c.* FROM (
+			SELECT
+				<include refid="code" />
+				<include refid="selectCommon" />
+			) c
+		WHERE delNy = 0
+		LIMIT #{rowNumToShow} OFFSET #{startRnumForMysql}
+	</select> 
+	
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT 
+  			seq,
+			delNy,
+			name,
+			codeGroup_seq
+		FROM 
+		  	code
+		WHERE 1=1
+	  		AND seq = #{seq}
+	</select>
+	
+    <update id="update">
+        UPDATE 
+        	code
+        SET 
+   			name = #{name},
+        	codeGroup_seq = #{codeGroup_seq}
+        WHERE 
+        	seq = #{seq}
+    </update>
+
+	<insert id="insert">
+ 		INSERT INTO code (
+ 			delNy,
+ 			name,
+ 			codeGroup_seq
+    	) VALUES (
+    		0, 
+    		#{name},
+    		#{codeGroup_seq}
+		)
+	</insert>
+     
+    <update id="delete">
+        UPDATE 
+        	code
+       	SET
+			delNy = "1"
+		WHERE				
+		 	seq = #{seq}
+    </update>
+    
+    <select id="selectListCachedCodeArrayList" resultMap="resultMapObj">
+		SELECT
+			seq,
+			name,
+			codegroup_seq
+		FROM
+			code
+		WHERE 1=1
+			AND delNy = 0    
+    </select>
+
+</mapper>
