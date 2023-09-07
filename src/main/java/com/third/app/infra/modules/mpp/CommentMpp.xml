@@ -53,7 +53,7 @@
 
 	<select id="selectOne" resultMap="resultMapObj">
 		SELECT 
-		  	<include refid="board" /> 
+		  	<include refid="comment" /> 
 		FROM comment a
 			LEFT JOIN member b ON b.seq = a.member_seq AND b.delNy = 0
 		WHERE 1=1

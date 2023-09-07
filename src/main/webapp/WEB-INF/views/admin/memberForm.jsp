@@ -54,11 +54,11 @@
 	        </div>
 	        <div class="text-center"> 
 	        <!-- 입력창 시작 -->
-<!-- 		    <div class="form-floating py-4"> -->
-<%-- 		        <input type="text" class="form-control" id="seq" name="seq" required readonly value="<c:out value="${item.seq}"/>" ${empty item.seq ? 'disabled' : ''}> --%>
-<!-- 		    	<label for="seq">Seq (Auto Increment)</label> -->
-<!-- 		    	<div class="invalid-feedback"></div> -->
-<!-- 		    </div> -->
+		    <div class="form-floating col-6 mb-3">
+		        <input type="text" class="form-control" id="seq" name="seq" readonly placeholder="" value="<c:out value="${item.seq}"/>" ${empty item.seq ? 'disabled' : ''}>
+		    	<label for="seq">Seq (Auto Increment)</label>
+		    	<div class="invalid-feedback"></div>
+		    </div>
 <!-- 	        <div class="form-floating py-4"> -->
 <!-- 	        	<label for="id">아이디</label> -->
 <%-- 	            <input type="text" class="form-control" id="id" name="id" required readonly value="<c:out value="${item.id}"/>"> --%>
@@ -69,7 +69,7 @@
 <!-- 	        	<div class="isvalid-feedback"></div> -->
 <!-- 	        </div> -->
 	         	<div class="form-floating col-6 mb-3">
-				  	<input type="password" class="form-control" id="floatingInput" name="pw">
+				  	<input type="password" class="form-control" id="floatingInput" name="pw" placeholder="">
 				  	<label for="floatingInput">테스트용</label>
 				  	<div class="invalid-feedback"></div>
 				</div>
