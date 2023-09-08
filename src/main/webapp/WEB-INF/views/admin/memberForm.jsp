@@ -52,62 +52,60 @@
 				<label for="<c:out value="${name }"/>" class="form-label input-file-button"><b>+</b></label>
 	 			<input class="form-control form-control-sm" id="<c:out value="${name }"/>" name="<c:out value="${name }"/>" type="file" multiple="multiple" style="display: none;" onChange="upload('<c:out value="${name }"/>', <c:out value="${type }"/>, 1, 1, 0, 0, 3);">
 	        </div>
-	        <div class="text-center"> 
-	        <!-- 입력창 시작 -->
-		    <div class="form-floating col-6 mb-3">
-		        <input type="text" class="form-control" id="seq" name="seq" readonly placeholder="" value="<c:out value="${item.seq}"/>" ${empty item.seq ? 'disabled' : ''}>
-		    	<label for="seq">Seq (Auto Increment)</label>
-		    	<div class="invalid-feedback"></div>
-		    </div>
-<!-- 	        <div class="form-floating py-4"> -->
-<!-- 	        	<label for="id">아이디</label> -->
-<%-- 	            <input type="text" class="form-control" id="id" name="id" required readonly value="<c:out value="${item.id}"/>"> --%>
-<!-- 	        </div> -->
-<!-- 	        <div class="form-floating py-4"> -->
-<!-- 	        	<label for="pw">비밀번호</label> -->
-<%-- 	            <input type="password" class="form-control" id="pw" name="pw" required value="<c:out value="${item.pw}"/>"> --%>
-<!-- 	        	<div class="isvalid-feedback"></div> -->
-<!-- 	        </div> -->
-	         	<div class="form-floating col-6 mb-3">
-				  	<input type="password" class="form-control" id="floatingInput" name="pw" placeholder="">
-				  	<label for="floatingInput">테스트용</label>
+	        <div class="d-flex justify-content-center flex-wrap"> 
+		        <!-- 입력창 시작 -->
+			    <div class="form-floating col-7 mb-3">
+			        <input type="text" class="form-control" id="seq" name="seq" required readonly placeholder="" value="<c:out value="${item.seq}"/>" ${empty item.seq ? 'disabled' : ''}>
+			    	<label for="seq">Seq (Auto Increment)</label>
+			    	<div class="invalid-feedback"></div>
+			    </div>
+   				<div class="form-floating col-7 mb-3">
+			        <select id="defaultNy" class="form-control" name="defaultNy" aria-label="">
+			            <option value="0" <c:if test="${item.defaultNy == 0}">selected</c:if>>회원등급을 선택하세요.</option>
+			            <option value="4" <c:if test="${item.defaultNy == 4}">selected</c:if>>관리자</option>
+			            <option value="5" <c:if test="${item.defaultNy == 5}">selected</c:if>>사용자</option>
+			        </select>
+        	        <label for="defaultNy">회원등급</label>
+			    </div>
+		        <div class="form-floating col-7 mb-3">
+		            <input type="text" class="form-control" id="id" name="id" required readonly placeholder="" value="<c:out value="${item.id}"/>">
+			        <label for="id">아이디</label>
+			        <div class="invalid-feedback"></div>
+		        </div>
+		        <div class="form-floating col-7 mb-3">
+		            <input type="password" class="form-control" id="pw" name="pw" required placeholder="" value="<c:out value="${item.pw}"/>">
+		        	<label for="pw">비밀번호</label>
+		        	<div class="isvalid-feedback"></div>
+		        </div>
+				<div class="form-floating col-7 mb-3">
+				  	<input type="text" class="form-control" id="name" name="name" required placeholder="" value="<c:out value="${item.name}"/>">
+				  	<label for="name">이름</label>
 				  	<div class="invalid-feedback"></div>
 				</div>
-				<div class="form-floating mb-3">
-				  <input type="text" class="form-control" id="name" name="name" placeholder="">
-				  <label for="name">이름을 입력하세요.</label>
-				  <div class="invalid-feedback"></div>
-				</div>
-<!-- 	        <div class="form-floating py-4"> -->
-<!-- 	        	<label for="name">이름</label> -->
-<%-- 	            <input type="text" class="form-control" id="name" name="name" required value="<c:out value="${item.name}"/>"> --%>
-<!-- 	            <div class="invalid-feedback"></div> -->
-<!-- 	        </div> -->
-<!-- 		    <div class="form-floating"> -->
-<!-- 		        <label for="gender">성별</label> -->
-<!-- 		        <select id="gender" class="form-control" name="gender"> -->
-<%-- 		            <option value="0" <c:if test="${item.gender == 0}">selected</c:if>>성별을 선택해주세요.</option> --%>
-<%-- 		            <option value="1" <c:if test="${item.gender == 1}">selected</c:if>>남성</option> --%>
-<%-- 		            <option value="2" <c:if test="${item.gender == 2}">selected</c:if>>여성</option> --%>
-<%-- 		            <option value="3" <c:if test="${item.gender == 3}">selected</c:if>>기타</option> --%>
-<!-- 		        </select> -->
-<!-- 		    </div> -->
-<!-- 	        <div class="form-floating"> -->
-<!-- 	        	<label for="email">이메일</label> -->
-<%-- 	            <input type="text" class="form-control" id="email" name="email" required value="<c:out value="${item.email}"/>"> --%>
-<!-- 	        </div> -->
-<!-- 	        <div class="form-floating"> -->
-<!-- 	        	<label for="phone">전화번호</label> -->
-<%-- 	            <input type="text" class="form-control" id="phone" name="phone" required value="<c:out value="${item.phone}"/>"> --%>
-<!-- 	        </div> -->
-<!-- 		    <div class="form-floating"> -->
-<!-- 		        <label for="level">권한등급</label> -->
-<!-- 		        <select id="level" class="form-control" name="level"> -->
-<%-- 		            <option value="0" <c:if test="${item.level == 0}">selected</c:if>>권한등급을 선택해주세요.</option> --%>
-<%-- 		            <option value="4" <c:if test="${item.level == 4}">selected</c:if>>관리자</option> --%>
-<%-- 		            <option value="5" <c:if test="${item.level == 5}">selected</c:if>>사용자</option> --%>
-<!-- 		        </select> -->
-<!-- 		    </div> -->
+			    <div class="form-floating col-7 mb-3">
+			        <select id="gender" class="form-control" name="gender" aria-label="">
+			            <option value="0" <c:if test="${item.gender == 0}">selected</c:if>>성별을 선택하세요.</option>
+			            <option value="1" <c:if test="${item.gender == 1}">selected</c:if>>남성</option>
+			            <option value="2" <c:if test="${item.gender == 2}">selected</c:if>>여성</option>
+			            <option value="3" <c:if test="${item.gender == 3}">selected</c:if>>기타</option>
+			        </select>
+			        <label for="gender">성별</label>
+			    </div>
+		        <div class="form-floating col-7 mb-3">
+		            <input type="text" class="form-control" id="email" name="email" required placeholder="" value="<c:out value="${item.email}"/>">
+		        	<label for="email">이메일</label>
+		        	<div class="invalid-feedback"></div>
+		        </div>
+		        <div class="form-floating col-7 mb-3">
+		            <input type="text" class="form-control" id="zipcode" name="zipcode" required placeholder="" value="<c:out value="${item.zipcode}"/>">
+       				<label for="zipcode">우편번호</label>
+       				<div class="invalid-feedback"></div>
+       			</div>
+       			<div class="form-floating col-7 mb-3">
+		            <input type="text" class="form-control" id="address" name="address" required placeholder="" value="<c:out value="${item.address}"/>">
+       				<label for="address">주소</label>
+       				<div class="invalid-feedback"></div>
+       			</div>
 			</div>
 			<!-- 파일 업로드 -->	
 			<div class="d-flex justify-content-center">        
