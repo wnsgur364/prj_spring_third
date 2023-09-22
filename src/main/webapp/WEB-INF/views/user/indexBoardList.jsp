@@ -33,7 +33,7 @@
 	                         <th scope="row">1</th>
 	                         <td class="col-7">
 	                         	<a href="boardSelectOne" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
-	                         		취업 시켜주세요.
+	                         		내용이들어가야해
 	                         	</a>
 	                         </td>
 	                         <td>이준혁</td>
