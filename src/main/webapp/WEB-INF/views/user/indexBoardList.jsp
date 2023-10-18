@@ -17,30 +17,42 @@
 <%@ include file="../include/includeHeader.jsp" %>
     <div class="container">
         <div class="col">
-        	<form>
+        	<form name=formList method="post">
              	<table class="table table-hover text-center table-responsive">
-                 	<thead>
-	                 	<tr>
+               		<thead>
+                 		<tr>
 	                      	<th scope="col">번호</th>
 	 	                    <th class="col-5" scope="col">제목</th>
 	     	                <th scope="col">작성자</th>
 	         	            <th scope="col">날짜</th>
 	         	            <th scope="col">조회수</th>
 	             		</tr>
-	                 </thead>
-	                 <tbody>
-	                     <tr>
-	                         <th scope="row">1</th>
-	                         <td class="col-7">
-	                         	<a href="boardSelectOne" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
-	                         		내용이들어가야해
-	                         	</a>
-	                         </td>
-	                         <td>이준혁</td>
-	                         <td>2023.08.31</td>
-	                         <td>3,125,522,014</td>
-	                     </tr>
-	                 </tbody>
+                 	</thead>
+                 	<tbody>
+<%-- 						<c:set var="listCodeTrCategory" value="${CodeServiceImpl.selectListCachedCode('3')}"/> --%>
+						<c:choose>
+							<c:when test="${fn:length(list) eq 0}">
+								<tr>
+					                <td colspan="6">게시글이 없습니다.</td>
+					            </tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${list}" var="list" varStatus="loop">
+			                     	<tr>
+				                        <th scope="row">${loop.count}</th>
+				                        <td class="col-7">
+			                        		<a href="boardSelectOne" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+			                        			${list.title}
+				                        	</a>
+				                        </td>
+				                        <td>${list.author}</td>
+				                        <td>${list.like}</td>
+				                        <td>${list.modDate}</td>
+				                     </tr>
+                   				</c:forEach>
+          					</c:otherwise>
+       					</c:choose>
+                	</tbody>
              	</table>
         	</form>
         </div>
