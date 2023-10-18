@@ -1,6 +1,8 @@
 package com.third.app.infra.modules.vo;
 
-public class CodeVo {
+import com.third.app.infra.common.base.BaseVo;
+
+public class CodeVo extends BaseVo {
 	private Integer shOption;
 	private String shKeyword;
 	private String seq;

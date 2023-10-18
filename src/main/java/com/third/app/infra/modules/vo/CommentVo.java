@@ -1,6 +1,8 @@
 package com.third.app.infra.modules.vo;
 
-public class CommentVo {
+import com.third.app.infra.common.base.BaseVo;
+
+public class CommentVo extends BaseVo {
 	private Integer shOption;
 	private String shKeyword;
 	private String seq;

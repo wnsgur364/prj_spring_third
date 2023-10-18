@@ -1,6 +1,8 @@
 package com.third.app.infra.modules.vo;
 
-public class BoardVo {
+import com.third.app.infra.common.base.BaseVo;
+
+public class BoardVo extends BaseVo {
 	private Integer shOption;
 	private String shKeyword;
 	private String seq;
