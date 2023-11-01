@@ -41,7 +41,7 @@
 			                     	<tr>
 				                        <th scope="row">${loop.count}</th>
 				                        <td class="col-7">
-			                        		<a href="boardSelectOne" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+			                        		<a href="boardSelectOne" id="linkContents" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
 			                        			${list.title}
 				                        	</a>
 				                        </td>
@@ -66,5 +66,14 @@
        		<button class="btn btn-outline-dark" type="button" onclick="location.href='boardForm'">글쓰기</button>
         </div>
     </div>
+<script>
+	$("#linkContents").click(function() {
+		// 수정 폼으로 데이터 전달
+		if (checkedItems.length > 0) {
+			var url = "boardSelectOne?seq=" + checkedItems.join(",");
+			location.href = url;
+		}
+	});
+</script>
 </body>
 </html>
