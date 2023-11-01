@@ -17,10 +17,6 @@
 <%@ include file="../include/includeHeader.jsp" %>
     <div class="container">
 		<form class="needs-validation" id="form" name="form" method="post" autocomplete="off" enctype="multipart/form-data" novalidate>
-	        
-	        
-	        
-	        
 	        <div class="col-md-4 py-2">
 	        	<c:set var="type" value="2"/>
 	        	<c:set var="name" value="uploadImg"/>
